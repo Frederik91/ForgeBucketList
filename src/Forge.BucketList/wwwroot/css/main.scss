@@ -1,0 +1,97 @@
+﻿$blue: #0696D7;
+$white: #FFF;
+$gray: #666666;
+$Black: #000;
+
+$border: 10px;
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: 10% 80px 20% 55%;
+    grid-template-areas: 
+    "header"
+     "add" 
+     "list";
+     justify-items: center;
+     justify-self: stretch;
+
+     button {
+        background-color: $blue;
+        border: none;
+        color: white;
+        margin-left: 10px;
+        border-radius: $border;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    .container-header {
+        text-align: center;
+        
+        h1 {
+            grid-row: 1;
+            font-weight: bold;
+        }
+
+        img {
+            height: 70px;
+            grid-row: 2;
+        }
+    }
+
+    .container-add {
+        grid-row: 3;
+        margin-top: 1em;
+        input {
+            border-color: $Black;
+            border-radius: $border;
+            padding-left: 7px;
+        }
+    
+        button {
+            width: 70px;
+        }
+    }
+
+    .container-list {
+        grid-row: 4;
+        ul {
+            white-space: 0.4em;
+            padding: 0px;
+            list-style-position: outside;
+        }
+        li {
+            list-style-type: none;
+            color: $Black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            list-style: none;
+              padding: 10px 20px;
+              text-transform: capitalize;
+              font-weight: 600;
+              border: 2px solid #025f70;
+              border-radius: $border;
+              margin-bottom: 10px;
+            margin-top: 15px;
+              background: lighten($blue, 50%);
+              transition: all 0.75s;
+
+            button {
+               
+            }
+            &:hover {
+                color: $blue
+            }
+        }
+    }
+}

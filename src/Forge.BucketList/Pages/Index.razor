@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Forge.Client.Models
+@using Forge.Client.Services
+@inject IBucketService BucketService
+
+<div class="container">
+    <div class="container-header">
+        <h1>Bucket List</h1>
+        <img src="https://avatars0.githubusercontent.com/u/16883010?s=280&v=4"/>
+    </div>
+    <div class="container-add">
+        <input type="text" placeholder="New bucket list item" @bind-value="@_bucketKey" />
+        <button @onclick="@(x => Add())">Add</button>
+    </div>
+    <div class="container-list">
+        <ul>
+            @foreach (var bucket in _buckets?.OrderBy(x => x.CreatedDate).ToList() ?? new List<Bucket>())
+            {
+            <li><a>@bucket.BucketKey</a><button @onclick="@(async x => await DeleteBucket(bucket.BucketKey))">Delete</button></li>
+            }
+        </ul>
+    </div>
+</div>
+@code
+{
+    private List<Bucket> _buckets;
+    private string _bucketKey;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateBuckets();
+    }
+
+    private async Task UpdateBuckets()
+    {
+        _buckets = await BucketService.GetBuckets();
+        StateHasChanged();
+    }
+
+    private async Task Add()
+    {
+        await CreateBucket();
+        await UpdateBuckets();
+    }
+
+    private async Task CreateBucket()
+    {
+        _bucketKey = _bucketKey.ToLowerInvariant();
+        _bucketKey = _bucketKey.Replace(" ", "_");
+        var bucket = await BucketService.CreateBucket(_bucketKey);
+        _buckets.Add(bucket);
+        StateHasChanged();
+        _bucketKey = string.Empty;
+    }
+
+    private async Task DeleteBucket(string bucketKey)
+    {
+        _buckets.Remove(_buckets.First(x => x.BucketKey == bucketKey));
+        await BucketService.DeleteBucket(bucketKey);
+    }
+
+}
