@@ -12,14 +12,17 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 90%;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 100%;
     grid-template-rows: 10% 80px 20% 55%;
     grid-template-areas: 
     "header"
      "add" 
      "list";
      justify-items: center;
-     justify-self: stretch;
+     justify-self: center;
+
 
      button {
         background-color: $blue;
@@ -53,11 +56,15 @@ body {
         input {
             border-color: $Black;
             border-radius: $border;
-            padding-left: 7px;
+            padding-left: 15px;
+            height: 40px;
         }
     
         button {
             width: 70px;
+            margin-left: 0;
+            height: 40px;
+            justify-self: right;
         }
     }
 
