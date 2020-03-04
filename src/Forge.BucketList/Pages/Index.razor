@@ -16,7 +16,7 @@
         <ul>
             @foreach (var bucket in _buckets?.OrderBy(x => x.CreatedDate).ToList() ?? new List<Bucket>())
             {
-            <li><a>@bucket.BucketKey</a><button @onclick="@(async x => await DeleteBucket(bucket.BucketKey))">Delete</button></li>
+            <li><a>@bucket.BucketKey.Replace("_", " ")</a><button @onclick="@(async x => await DeleteBucket(bucket.BucketKey))">Delete</button></li>
             }
         </ul>
     </div>
