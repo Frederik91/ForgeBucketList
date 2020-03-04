@@ -28,7 +28,7 @@ namespace Forge.Client.Services
         {
             var args = new {
                 bucketKey,
-                policyKey = "transient"
+                policyKey = "persistent"
             };
             var json = JsonConvert.SerializeObject(args);
             var request = new RestRequest("/oss/v2/buckets", Method.POST);
